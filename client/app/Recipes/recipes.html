@@ -1,5 +1,6 @@
-<section id="recipes">		
-	<div class="recipeCard" >
-		<div class="recipeDescription">Some recipe</div>		
+<section id="recipes" ng-controller="RecipesController">		
+	<div class="recipeCard"  ng-repeat="recipe in recipes">
+		<div class="recipeDescription">{{recipe.description}}</div>		
 	</div>
-</section>
+
+	</section>

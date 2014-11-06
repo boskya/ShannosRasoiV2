@@ -12,34 +12,45 @@ module.exports = function (grunt) {
   // Define the configuration for all the tasks
   grunt.initConfig({
 
+    clean : {
+      js: ['client/app/js/client.js']
+    },
+
+    concat: {
+      js: {
+        src: ['client/app/app.js','client/app/**/*.js' ],
+        dest: 'client/app/js/client.js',
+      },
+    },
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       js: {
         files: ['client/**/*.js'],
-        tasks: ['newer:jshint:all'],
+        tasks: ['jshint:all', 'concat:js'],
       },
       compass: {
-        files: ['client/styles/**/*.{scss,sass}'],
-        tasks: ['compass:server', 'autoprefixer']
+        files: ['client/app/css/*.scss'],
+        tasks: ['compass:dist']
       },
       gruntfile: {
         files: ['Gruntfile.js']
       },
     },
 
+
     // Make sure code styles are up to par and there are no obvious mistakes
     jshint: {
       all: {
         src: [
           'Gruntfile.js',
-          'client/**/*.js'
+          'client/app/*.js'
         ]
       },
       test: {
         options: {
-          jshintrc: 'test/.jshintrc'
+          jshintrc : 'client/.jshintrc'
         },
-        src: ['test/spec/{,*/}*.js']
+        src: ['test/spec/**/*.js']
       }
     },
 
@@ -54,18 +65,28 @@ module.exports = function (grunt) {
       },
     },
 
+    karma: {
+      unit: {
+        configFile: 'client/test/karma.conf.js',
+      }
+    }
+
   });
 
-  grunt.registerTask('build', [
-    'compass'
-  ]);
+  grunt.registerTask('clienttest',['karma']);
 
   grunt.registerTask('default', [
+    'clean:js',
     'jshint:all',
+    'concat:js',
     'compass',
-    'build'
   ]);
+
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-compass');
+  grunt.loadNpmTasks('grunt-karma');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-clean');
 };
