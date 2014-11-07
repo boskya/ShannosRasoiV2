@@ -11,29 +11,47 @@ config(['$routeProvider', function($routeProvider) {
 
 angular.module('ShannosRasoi').controller('RecipesController', ['$scope', 'recipesService', function($scope, recipesService) {
 
-	$scope.recipes = recipesService.getRecipes();	
+ 	recipesService.getRecipes().then(function(recipes){
+ 		$scope.recipes = recipes;
+	});
 
-}]);
-angular.module("ShannosRasoi").service('recipesService', function() {
-		var recipes = [
-		{
-			"name" : "Some recipe",
+	$scope.seedRecipes = function(){
+		var recipe = {
+			"name" : "Some test recipe " + (new Date()).toString(),
 			"description" : "Some description",
 			"ingredients" : ["apple", "potato", "onion"],
 			"steps": [
 				"This is step 1",
 				"This is step 2"
 			]
-		}
-	];
+		};
+		$scope.recipes.push(recipe);
+	};		
 
-
+}]);
+angular.module("ShannosRasoi").service('recipesService', ['$http', function($http) {
+	var url = "http://localhost:3001/recipe-api/";
 
 	var getRecipes = function() {
-		return recipes;
+		var request = $http({
+				method: "get",
+				url: url + "recipes",
+				params: {
+					action: "get"
+				}
+		});
+		return request.then(handleSuccess, handleError);
+	};
+
+	function handleSuccess(response) {
+		return response.data;
+	};
+
+	function handleError() {
+		
 	};
 
 	return  {
 	 	getRecipes:  getRecipes
 	};
-});
+}]);

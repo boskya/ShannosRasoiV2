@@ -73,7 +73,6 @@ module.exports = function (grunt) {
 
   });
 
-  grunt.registerTask('clienttest',['karma']);
 
   grunt.registerTask('default', [
     'clean:js',
@@ -82,6 +81,7 @@ module.exports = function (grunt) {
     'compass',
   ]);
 
+  grunt.registerTask('clienttest',['default','karma']);
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-compass');

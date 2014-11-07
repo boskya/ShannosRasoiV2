@@ -1,7 +1,7 @@
 <section id="recipes" ng-controller="RecipesController">		
+<button id="seedRecipes" text="Seed Recipes" ng-click="seedRecipes()">Seed Recipes</button>
 	<div class="recipeCard"  ng-repeat="recipe in recipes">
 		<div class="recipeName">{{recipe.name}}</div>
 		<div class="recipeDescription">{{recipe.description}}</div>		
 	</div>
-
-	</section>
+</section>
