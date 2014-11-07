@@ -11,7 +11,11 @@ angular.module("ShannosRasoi").service('recipesService', ['$http', function($htt
 		});
 		return request.then(handleSuccess, handleError);
 	};
-	
+
+	var addRecipe = function(recipe) {
+		var request = $http.post(url + "recipes", recipe);
+		return request.then(handleSuccess, handleError);
+	};
 
 	function handleSuccess(response) {
 		return response.data;
@@ -22,6 +26,8 @@ angular.module("ShannosRasoi").service('recipesService', ['$http', function($htt
 	};
 
 	return  {
-	 	getRecipes:  getRecipes
+	 	getRecipes:  getRecipes,
+	 	addRecipe: addRecipe
 	};
+
 }]);

@@ -1,7 +1,5 @@
 module.exports = function() {
-
-	var getRecipes = function(req, res, next) {
-		var recipes = [
+	var recipes = [
 		{
 			"name" : "Some recipe eeee",
 			"description" : "Some description",
@@ -12,10 +10,20 @@ module.exports = function() {
 			]
 		}
 		];
+
+	var getRecipes = function(req, res, next) {
+	
 		res.send(recipes);
 	};
 
+	var addRecipe = function(req, res, next) {
+		var recipe = req.params;
+		recipes.push(recipe);
+		res.send(201, recipe)
+	};
+
 	return {
-		getRecipes : getRecipes
+		getRecipes : getRecipes,
+		addRecipe: addRecipe
 	};
 };

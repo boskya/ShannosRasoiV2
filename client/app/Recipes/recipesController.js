@@ -15,6 +15,7 @@ angular.module('ShannosRasoi').controller('RecipesController', ['$scope', 'recip
 			]
 		};
 		$scope.recipes.push(recipe);
+		recipesService.addRecipe(recipe);
 	};		
 
 }]);

@@ -26,6 +26,7 @@ angular.module('ShannosRasoi').controller('RecipesController', ['$scope', 'recip
 			]
 		};
 		$scope.recipes.push(recipe);
+		recipesService.addRecipe(recipe);
 	};		
 
 }]);
@@ -43,15 +44,22 @@ angular.module("ShannosRasoi").service('recipesService', ['$http', function($htt
 		return request.then(handleSuccess, handleError);
 	};
 
+	var addRecipe = function(recipe) {
+		var request = $http.post(url + "recipes", recipe);
+		return request.then(handleSuccess, handleError);
+	};
+
 	function handleSuccess(response) {
 		return response.data;
 	};
 
 	function handleError() {
-		
+
 	};
 
 	return  {
-	 	getRecipes:  getRecipes
+	 	getRecipes:  getRecipes,
+	 	addRecipe: addRecipe
 	};
+
 }]);
