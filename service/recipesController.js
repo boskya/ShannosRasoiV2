@@ -1,15 +1,18 @@
 var recipeRepository = require('./recipeRepository');
 
 module.exports = function() {
-	var recipes = [{
-		"name" : "Some recipe eeee",
-		"description" : "Some description",
-		"ingredients" : ["apple", "potato", "onion"],
-		"steps": [
-			"This is step 1",
-			"This is step 2"
-		]
-	}];
+	var recipes = [
+		{
+			"id" : "1234",
+			"name" : "Some recipe eeee",
+			"description" : "Some description",
+			"ingredients" : ["apple", "potato", "onion"],
+			"steps": [
+				"This is step 1",
+				"This is step 2"
+			]
+		}
+		];
 
 	var getRecipes = function(req, res, next) {
 		res.send(recipes);

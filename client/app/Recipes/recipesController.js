@@ -6,6 +6,7 @@ angular.module('ShannosRasoi').controller('RecipesController', ['$scope', 'recip
 
 	$scope.seedRecipes = function(){
 		var recipe = {
+			"id:": Math.random() * 1000,
 			"name" : "Some test recipe " + (new Date()).toString(),
 			"description" : "Some description",
 			"ingredients" : ["apple", "potato", "onion"],

@@ -5,6 +5,8 @@ angular.module('ShannosRasoi', [
 ]).
 config(['$routeProvider', function($routeProvider) {
   'use strict';
-  $routeProvider.when('/recipes',{templateUrl:'../Recipes/recipes.html', controller: 'RecipesController'});
-  $routeProvider.otherwise({redirectTo: '/recipes'});
+  $routeProvider
+  	.when('/recipes',{templateUrl:'../Recipes/recipes.html', controller: 'RecipesController'})
+  	.when("/recipes/:id", {templateUrl: "../Recipe-Detail/recipe-detail.html", controller: "recipesDetailController"})
+	.otherwise({redirectTo: '/recipes'});
 }]);
