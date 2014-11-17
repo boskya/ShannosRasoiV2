@@ -1,6 +1,7 @@
 module.exports = function() {
 	var recipes = [
 		{
+			"id" : "1234",
 			"name" : "Some recipe eeee",
 			"description" : "Some description",
 			"ingredients" : ["apple", "potato", "onion"],
