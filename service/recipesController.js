@@ -1,6 +1,4 @@
-var recipeRepository = require('./recipeRepository');
-
-module.exports = function() {
+module.exports = function(recipeRepository) {
 	var recipes = [
 		{
 			"id" : "1234",
