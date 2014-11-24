@@ -16,24 +16,39 @@ module.exports = function (grunt) {
       js: ['client/app/js/client.js']
     },
 
+    copy: {
+      "angular": {
+        files : [
+          { 
+            cwd: "bower_components/angular-ui-router/release/",
+            src: "angular-ui-router.min.js", 
+            dest: 'client/app/js/', 
+            flatter:true, 
+            expand:true
+          }
+        ] 
+      }
+    },
+
     concat: {
       js: {
         src: ['client/app/app.js','client/app/**/*.js' ],
         dest: 'client/app/js/client.js',
-      },
+      },      
     },
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       js: {
-        files: ['client/**/*.js'],
-        tasks: ['jshint:all', 'concat:js'],
+        files: ['client/app/**/*.js', '!client/app/js/*.js'],
+        tasks: ['clean:js','jshint:all', 'concat:js'],
       },
       compass: {
         files: ['client/app/css/*.scss'],
         tasks: ['compass:dist']
       },
       gruntfile: {
-        files: ['Gruntfile.js']
+        files: ['Gruntfile.js'],
+        tasks: ['default']
       },
     },
 
@@ -78,6 +93,7 @@ module.exports = function (grunt) {
     'clean:js',
     'jshint:all',
     'concat:js',
+    'copy:angular',
     'compass',
   ]);
 
@@ -89,4 +105,5 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-copy');
 };
