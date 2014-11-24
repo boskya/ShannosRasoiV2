@@ -35,10 +35,10 @@ describe('recipe controller', function () {
 	});
 
 	it('should get recipes', function (done) {
-		var expectedContent = [{content: 'a good recipe'}, {content: 'a better recipe'}],
+		var expectedContent = {rows: [{content: 'a good recipe'}, {content: 'a better recipe'}]},
 			response = {
 				send: function (res) {
-					expect(res).to.equal(expectedContent);
+					expect(res).to.equal(expectedContent.rows);
 					done();
 				}
 			};
