@@ -11,7 +11,7 @@ module.exports = function(recipeRepository) {
 		recipeRepository
 			.getRecipes()
 			.then(function (recipes) {
-				res.send(recipes.rows);
+				res.send(recipes);
 			});
 	};
 

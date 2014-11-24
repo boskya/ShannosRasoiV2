@@ -21,12 +21,17 @@ var getRecipe = function (id) {
 
 var getRecipes = function () {
 	var deferred = q.defer();
-	db.list(function (err, body) {
+	db.list({include_docs: true}, function (err, body) {
+		var docs = null;
+
 		if (err) {
 			deferred.reject(err);
 		}
 		else {
-			deferred.resolve(body);
+			docs = body.rows.map(function (row) {
+				return row.doc;
+			});
+			deferred.resolve(docs);
 		}
 	});
 	return deferred.promise;
