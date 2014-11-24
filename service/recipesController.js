@@ -1,4 +1,4 @@
-module.exports = function() {
+module.exports = function(recipeRepository) {
 	var recipes = [
 		{
 			"id" : "1234",
@@ -28,18 +28,32 @@ module.exports = function() {
 		}
 		];
 
+	var getRecipe = function(req, res, next) {
+		recipeRepository
+			.get(req.params.id)
+			.then(function (recipe) {
+				res.send(recipe);
+			});
+	};
+
 	var getRecipes = function(req, res, next) {
-	
-		res.send(recipes);
+		recipeRepository
+			.getRecipes()
+			.then(function (recipes) {
+				res.send(recipes);
+			});
 	};
 
 	var addRecipe = function(req, res, next) {
 		var recipe = req.params;
 		recipes.push(recipe);
-		res.send(201, recipe)
+
+		recipeRepository.saveRecipe(recipe);
+		res.send(201, recipe);
 	};
 
 	return {
+		getRecipe: getRecipe,
 		getRecipes : getRecipes,
 		addRecipe: addRecipe
 	};
