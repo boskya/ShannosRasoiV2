@@ -80,7 +80,6 @@ module.exports = function (grunt) {
         src: ['service/test/**/*.js']
       }
     }
-
   });
 
 
