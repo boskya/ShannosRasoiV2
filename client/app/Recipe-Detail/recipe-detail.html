@@ -1,9 +1,9 @@
-<div itemscope itemtype="http://schema.org/Recipe" ng-controller="recipesDetailController">
+<div itemscope itemtype="http://schema.org/Recipe">
 	<span itemprop="name">{{recipe.name}}</span>
 	<div>
 		<img src="{{recipe.mainImage}}" itemprop="image"/>
 	</div>
-	<span itemprop="description"></span>
+	<span itemprop="description">{{recipe.description}}</span>
 	<div class="ingredients" ng-repeat="ingredient in recipe.ingredients">
 		<span itemprop="ingredients"></span>
 	</div>
