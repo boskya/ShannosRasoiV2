@@ -83,7 +83,7 @@ module.exports = function (grunt) {
 
     karma: {
       unit: {
-        configFile: 'client/test/karma.conf.js',
+        configFile: 'client/test/karma.conf.js'
       }
     },
 
@@ -105,10 +105,10 @@ module.exports = function (grunt) {
     'concat:js',
     'copy:angular',
     'compass',
-    'clienttest'
+    'karma:unit'
   ]);
 
-  grunt.registerTask('clienttest',['default','karma']);
+  grunt.registerTask('clienttest',['clean:js', 'jshint:all', 'concat:js','karma:unit']);
   grunt.registerTask('servertest',['mochaTest']);
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
