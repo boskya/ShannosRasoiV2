@@ -1,12 +1,15 @@
 angular.module('ShannosRasoi').controller('RecipesController', ['$scope', 'recipesService', function($scope, recipesService) {
+	$scope.recipes = [];
 
+	console.log('created main controller');
  	recipesService.getRecipes().then(function(recipes){
- 		$scope.recipes = recipes;
+ 		console.log(recipes);
+ 		$scope.recipes = recipes || [];
 	});
 
 	$scope.seedRecipes = function(){
 		var recipe = {
-			"id:": Math.random() * 1000,
+			"id": Math.random() * 1000,
 			"name" : "Some test recipe " + (new Date()).toString(),
 			"description" : "Some description",
 			"ingredients" : ["apple", "potato", "onion"],
@@ -17,6 +20,6 @@ angular.module('ShannosRasoi').controller('RecipesController', ['$scope', 'recip
 		};
 		$scope.recipes.push(recipe);
 		recipesService.addRecipe(recipe);
-	};		
+	};
 
 }]);
