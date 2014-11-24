@@ -21,7 +21,11 @@ module.exports = function(recipeRepository) {
 	};
 
 	var getRecipes = function(req, res, next) {
-		res.send(recipes);
+		recipeRepository
+			.getRecipes()
+			.then(function (recipes) {
+				res.send(recipes);
+			});
 	};
 
 	var addRecipe = function(req, res, next) {

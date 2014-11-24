@@ -5,6 +5,7 @@ describe('recipe controller', function () {
 	beforeEach(function () {
 		this.mockRepository = {
 			get: sinon.stub(),
+			getRecipes: sinon.stub(),
 			saveRecipe: sinon.spy()
 		};
 		this.recipeController = require('../recipesController')(this.mockRepository);
@@ -31,5 +32,23 @@ describe('recipe controller', function () {
 		});
 
 		this.recipeController.getRecipe({params: {id: '123'}}, response);
+	});
+
+	it('should get recipes', function (done) {
+		var expectedContent = [{content: 'a good recipe'}, {content: 'a better recipe'}],
+			response = {
+				send: function (res) {
+					expect(res).to.equal(expectedContent);
+					done();
+				}
+			};
+
+		this.mockRepository.getRecipes.returns({
+			then: function (then) {
+				then(expectedContent);
+			}
+		});
+
+		this.recipeController.getRecipes({}, response);
 	});
 });

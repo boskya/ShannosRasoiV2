@@ -19,7 +19,21 @@ var getRecipe = function (id) {
 	return deferred.promise;
 };
 
+var getRecipes = function () {
+	var deferred = q.defer();
+	db.list(function (err, body) {
+		if (err) {
+			deferred.reject(err);
+		}
+		else {
+			deferred.resolve(body);
+		}
+	});
+	return deferred.promise;
+};
+
 module.exports = {
 	get: getRecipe,
+	getRecipes: getRecipes,
 	saveRecipe: saveRecipe
 };
