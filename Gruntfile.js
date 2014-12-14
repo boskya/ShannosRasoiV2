@@ -108,6 +108,10 @@ module.exports = function (grunt) {
     'karma:unit'
   ]);
 
+  grunt.registerTask('ci', [
+    'default'
+  ]);
+
   grunt.registerTask('clienttest',['clean:js', 'jshint:all', 'concat:js','karma:unit']);
   grunt.registerTask('servertest',['mochaTest']);
 
