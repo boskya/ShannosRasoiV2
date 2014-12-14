@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node app",
-    "test": "grunt"
+    "test": "grunt ci"
   },
   "dependencies": {
     "express": "^4.10.2",
