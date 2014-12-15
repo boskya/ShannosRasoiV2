@@ -2,18 +2,19 @@ var	q = require('q');
 
 module.exports = function (store) {
 	function mapRecipe(rawRecipe) {
+		console.log(rawRecipe);
 		return {
-			id: rawRecipe.id,
-			name: rawRecipe.doc.name,
-			description: rawRecipe.doc.description,
-			ingredients: rawRecipe.doc.ingredients,
-			steps: rawRecipe.doc.steps
+			id: rawRecipe._id,
+			name: rawRecipe.name,
+			description: rawRecipe.description,
+			ingredients: rawRecipe.ingredients,
+			steps: rawRecipe.steps
 		};
 	}
 
 	function mapRecipes(rawRecipes) {
 		return rawRecipes.map(function (rawRecipe) {
-			return mapRecipe(rawRecipe);
+			return mapRecipe(rawRecipe.doc);
 		});
 	}
 
