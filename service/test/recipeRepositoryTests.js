@@ -7,9 +7,13 @@ describe('recipe repository', function () {
 			list: function (params, callback) {
 				callback(undefined, {
 					rows: [{
-						doc: 'a good recipe'
+						doc: {
+							name: 'a good recipe'
+						}
 					}, {
-						doc: 'a knockout recipe'
+						doc: {
+							name: 'a knockout recipe'
+						}
 					}]
 				});
 			},
@@ -23,7 +27,8 @@ describe('recipe repository', function () {
 		this.recipeRepository.getRecipes()
 			.then(function (somerecipes) {
 				expect(somerecipes).to.be.ok();
-				expect(somerecipes).to.have.members(['a good recipe', 'a knockout recipe']);
+				expect(somerecipes[0].name).to.equal('a good recipe');
+				expect(somerecipes[1].name).to.equal('a knockout recipe');
 				done();
 			});
 	});

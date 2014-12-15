@@ -17,8 +17,11 @@ module.exports = function(recipeRepository) {
 
 	var addRecipe = function(req, res, next) {
 		var recipe = req.params;
-		recipeRepository.saveRecipe(recipe);
-		res.send(201, recipe);
+		recipeRepository
+			.saveRecipe(recipe)
+			.then(function (recipe) {
+				res.send(201, recipe);
+			});
 	};
 
 	return {

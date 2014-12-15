@@ -1,4 +1,6 @@
 angular.module('ShannosRasoi').controller('RecipesController', ['$scope', 'recipesService', function($scope, recipesService) {
+	'use strict';
+
 	$scope.recipes = [];
 
  	recipesService.getRecipes().then(function(recipes){
@@ -16,8 +18,7 @@ angular.module('ShannosRasoi').controller('RecipesController', ['$scope', 'recip
 				"This is step 2"
 			]
 		};
-		$scope.recipes.push(recipe);
-		recipesService.addRecipe(recipe);
+		$scope.recipes.push(recipesService.addRecipe(recipe));
 	};
 
 }]);

@@ -1,6 +1,7 @@
-angular.module("ShannosRasoi").service('recipesService', ['$http', function($http) {
-	var url = "http://localhost:3001/recipe-api/";
-	var recipes = [];
+angular.module('ShannosRasoi').service('recipesService', ['$http', function($http) {
+	'use strict';
+
+	var url = 'http://localhost:3001/recipe-api/';
 
 	var getRecipes = function() {
 		var request = $http({
@@ -14,8 +15,9 @@ angular.module("ShannosRasoi").service('recipesService', ['$http', function($htt
 	};
 
 	var addRecipe = function(recipe) {
-		var request = $http.post(url + "recipes", recipe);
-		return request.then(handleSuccess, handleError);
+		$http
+			.post(url + "recipes", recipe)
+			.then(handleSuccess, handleError);
 	};
 
 	var getRecipe = function(id) {
@@ -31,11 +33,11 @@ angular.module("ShannosRasoi").service('recipesService', ['$http', function($htt
 
 	function handleSuccess(response) {
 		return response.data;
-	};
+	}
 
 	function handleError() {
 
-	};
+	}
 
 	return  {
 	 	getRecipes:  getRecipes,

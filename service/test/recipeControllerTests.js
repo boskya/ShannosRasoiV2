@@ -6,7 +6,7 @@ describe('recipe controller', function () {
 		this.mockRepository = {
 			get: sinon.stub(),
 			getRecipes: sinon.stub(),
-			saveRecipe: sinon.spy()
+			saveRecipe: sinon.stub().returns({then: function(){}})
 		};
 		this.recipeController = require('../recipesController')(this.mockRepository);
 	});
