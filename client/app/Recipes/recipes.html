@@ -1,8 +1,7 @@
 <section id="recipes">
 <button id="seedRecipes" text="Seed Recipes" ng-click="seedRecipes()">Seed Recipes</button>
 	<div class="recipeCard"  ng-repeat="recipe in recipes">
-		<a ui-sref="recipes-detail({id: recipe.id})">
-			<div> {{recipe.id}}</div>
+		<a ui-sref="recipes-detail({id: recipe._id})">
 			<div class="recipeName">{{recipe.name}}</div>
 			<div class="recipeDescription">{{recipe.description}}</div>
 		</a>
