@@ -15,7 +15,7 @@ angular.module('ShannosRasoi').service('recipesService', ['$http', function($htt
 	};
 
 	var addRecipe = function(recipe) {
-		$http
+		return $http
 			.post(url + "recipes", recipe)
 			.then(handleSuccess, handleError);
 	};

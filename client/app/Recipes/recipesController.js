@@ -31,7 +31,10 @@ angular.module('ShannosRasoi').controller('RecipesController', ['$scope', 'recip
 				"This is step 2"
 			]
 		};
-		$scope.recipes.push(recipesService.addRecipe(recipe));
+		
+		recipesService.addRecipe(recipe).then(function(addedRecipe) {
+			$scope.recipes.push(addedRecipe);
+		})
 	};
 
 }]);
