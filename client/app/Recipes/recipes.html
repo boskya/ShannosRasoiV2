@@ -2,7 +2,6 @@
 <button id="seedRecipes" text="Seed Recipes" ng-click="seedRecipes()">Seed Recipes</button>
 	<div class="recipeCard"  ng-repeat="recipe in recipes">
 		<a ui-sref="recipes-detail({id: recipe._id})">
-			<div> {{recipe._id}}</div>
 			<div class="recipeName">{{recipe.name}}</div>			
 			<div class="recipeDescription">{{recipe.description}}</div>		
 		</a>
