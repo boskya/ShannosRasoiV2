@@ -1,9 +1,7 @@
 angular.module('ShannosRasoi').controller('RecipesController', ['$scope', 'recipesService', function($scope, recipesService) {
 	$scope.recipes = [];
 
-	console.log('created main controller');
  	recipesService.getRecipes().then(function(recipes){
- 		console.log(recipes);
  		$scope.recipes = recipes || [];
 	});
 
