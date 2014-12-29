@@ -1,6 +1,7 @@
 angular.module('ShannosRasoi').service('recipesService', ['$http', function($http) {
 	'use strict';
 
+	//TODO: Configure api route.
 	var url = 'http://localhost:3001/recipe-api/';
 
 	var getRecipes = function() {

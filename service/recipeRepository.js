@@ -2,7 +2,6 @@ var	q = require('q');
 
 module.exports = function (store) {
 	function mapRecipe(rawRecipe) {
-		console.log(rawRecipe);
 		return {
 			id: rawRecipe._id,
 			name: rawRecipe.name,
