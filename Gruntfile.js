@@ -16,6 +16,20 @@ module.exports = function (grunt) {
       js: ['client/app/js/client.js']
     },
 
+    copy: {
+      "angular": {
+        files : [
+          {
+            cwd: "bower_components/angular-ui-router/release/",
+            src: "angular-ui-router.min.js",
+            dest: 'client/app/js/',
+            flatter:true,
+            expand:true
+          }
+        ]
+      }
+    },
+
     concat: {
       js: {
         src: ['client/app/app.js','client/app/**/*.js' ],
@@ -25,15 +39,16 @@ module.exports = function (grunt) {
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       js: {
-        files: ['client/**/*.js'],
-        tasks: ['jshint:all', 'concat:js'],
+        files: ['client/app/**/*.js', '!client/app/js/*.js'],
+        tasks: ['clean:js','jshint:all', 'concat:js'],
       },
       compass: {
         files: ['client/app/css/*.scss'],
         tasks: ['compass:dist']
       },
       gruntfile: {
-        files: ['Gruntfile.js']
+        files: ['Gruntfile.js'],
+        tasks: ['default']
       },
     },
 
@@ -43,7 +58,8 @@ module.exports = function (grunt) {
       all: {
         src: [
           'Gruntfile.js',
-          'client/app/*.js'
+          'client/app/*.js',
+          'service/**/*.js'
         ]
       },
       test: {
@@ -67,21 +83,37 @@ module.exports = function (grunt) {
 
     karma: {
       unit: {
-        configFile: 'client/test/karma.conf.js',
+        configFile: 'client/test/karma.conf.js'
+      }
+    },
+
+    mochaTest: {
+      test: {
+        options: {
+          reporter: 'spec'
+        },
+        src: ['service/test/**/*.js']
       }
     }
-
   });
 
 
   grunt.registerTask('default', [
     'clean:js',
     'jshint:all',
+    'servertest',
     'concat:js',
+    'copy:angular',
     'compass',
+    'karma:unit'
   ]);
 
-  grunt.registerTask('clienttest',['default','karma']);
+  grunt.registerTask('ci', [
+    'default'
+  ]);
+
+  grunt.registerTask('clienttest',['clean:js', 'jshint:all', 'concat:js','karma:unit']);
+  grunt.registerTask('servertest',['mochaTest']);
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-compass');
@@ -89,4 +121,6 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-mocha-test');
 };

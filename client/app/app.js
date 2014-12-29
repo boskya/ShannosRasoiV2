@@ -1,10 +1,20 @@
 
 // Declare app level module which depends on views, and components
 angular.module('ShannosRasoi', [
-  'ngRoute'
+  'ui.router'
 ]).
-config(['$routeProvider', function($routeProvider) {
-  'use strict';
-  $routeProvider.when('/recipes',{templateUrl:'../Recipes/recipes.html', controller: 'RecipesController'});
-  $routeProvider.otherwise({redirectTo: '/recipes'});
-}]);
+config(function($stateProvider, $urlRouterProvider) {
+	$stateProvider
+		.state('recipes', {
+			url:"/recipes",
+			templateUrl:"../Recipes/recipes.html",
+			controller:'RecipesController'
+		})
+		.state('recipes-detail', {
+			url: "/recipes/:id",
+			templateUrl:"../Recipe-Detail/recipe-detail.html",
+			controller: "recipesDetailController"
+		});
+		$urlRouterProvider.otherwise("/recipes");
+
+});

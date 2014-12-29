@@ -1,28 +1,31 @@
-module.exports = function() {
-	var recipes = [
-		{
-			"name" : "Some recipe eeee",
-			"description" : "Some description",
-			"ingredients" : ["apple", "potato", "onion"],
-			"steps": [
-				"This is step 1",
-				"This is step 2"
-			]
-		}
-		];
+module.exports = function(recipeRepository) {
+	var getRecipe = function(req, res, next) {
+		recipeRepository
+			.get(req.params.id)
+			.then(function (recipe) {
+				res.send(recipe);
+			});
+	};
 
 	var getRecipes = function(req, res, next) {
-	
-		res.send(recipes);
+		recipeRepository
+			.getRecipes()
+			.then(function (recipes) {
+				res.send(recipes);
+			});
 	};
 
 	var addRecipe = function(req, res, next) {
 		var recipe = req.params;
-		recipes.push(recipe);
-		res.send(201, recipe)
+		recipeRepository
+			.saveRecipe(recipe)
+			.then(function (recipe) {
+				res.send(201, recipe);
+			});
 	};
 
 	return {
+		getRecipe: getRecipe,
 		getRecipes : getRecipes,
 		addRecipe: addRecipe
 	};
