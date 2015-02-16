@@ -1,13 +1,13 @@
 {
   "name": "application-name",
-  "version": "0.0.1",
+  "version": "0.0.1-1",
   "private": true,
   "scripts": {
     "start": "node app",
     "test": "grunt ci"
   },
   "dependencies": {
-    "express": "^4.10.2",
+    "express": "^4.11.2",
     "nano": "^6.0.1",
     "q": "^1.1.2",
     "restify": "^2.8.3"
@@ -32,5 +32,9 @@
     "karma-sinon": "^1.0.3",
     "mocha": "^2.0.1",
     "sinon": "^1.11.1"
+  },
+  "subdomain": "shannos-rasoi",
+  "engines": {
+    "node": "0.10.x"
   }
 }

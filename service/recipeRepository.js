@@ -46,7 +46,10 @@ module.exports = function (store) {
 
 	var getRecipes = function () {
 		var deferred = q.defer();
+		console.log('get');
 		store.list({include_docs: true}, function (err, body) {
+			console.log(body);
+			console.log(err);
 			var docs = null;
 
 			if (err) {
