@@ -1,6 +1,6 @@
 module.exports = function(server, store) {
 
-	var recipeRepository = require('./recipeRepository')(store);
+	var recipeRepository = require('./recipeRepository')();
 	var recipesController = require("./recipesController")(recipeRepository);
 
 	server.get('/recipe-api/recipes', recipesController.getRecipes);

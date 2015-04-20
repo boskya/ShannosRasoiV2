@@ -1,6 +1,7 @@
 var	q = require('q');
+var Recipe = require('./model/recipe');
 
-module.exports = function (store) {
+module.exports = function () {
 	function mapRecipe(rawRecipe) {
 		return {
 			id: rawRecipe._id,
@@ -19,12 +20,18 @@ module.exports = function (store) {
 
 	var saveRecipe = function (recipe) {
 		var deferred = q.defer();
-		store.insert(recipe, {include_docs: true}, function (err, body) {
+		var newRecipe = Recipe({
+  		name: recipe.name,
+			description: recipe.description,
+			ingredients: recipe.ingredients
+		});
+
+		newRecipe.save(function(err){
 			if (err) {
 				deferred.reject();
 			}
 			else {
-				recipe.id = body.id;
+				recipe.id = newRecipe.id;
 				deferred.resolve(recipe);
 			}
 		});
@@ -33,12 +40,12 @@ module.exports = function (store) {
 
 	var getRecipe = function (id) {
 		var deferred = q.defer();
-		store.get(id, function (err, body) {
+		Recipe.findById(id, function(err, recipe) {
 			if (err) {
 				deferred.reject(err);
 			}
 			else {
-				deferred.resolve(mapRecipe(body));
+				deferred.resolve(recipe);
 			}
 		});
 		return deferred.promise;
@@ -47,16 +54,12 @@ module.exports = function (store) {
 	var getRecipes = function () {
 		var deferred = q.defer();
 		console.log('get');
-		store.list({include_docs: true}, function (err, body) {
-			console.log(body);
-			console.log(err);
-			var docs = null;
-
+		Recipe.find({}, function (err, recipes) {
 			if (err) {
 				deferred.reject(err);
 			}
 			else {
-				deferred.resolve(mapRecipes(body.rows));
+				deferred.resolve(recipes);
 			}
 		});
 		return deferred.promise;
