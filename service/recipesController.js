@@ -16,7 +16,7 @@ module.exports = function(recipeRepository) {
 	};
 
 	var addRecipe = function(req, res, next) {
-		var recipe = req.params;
+		var recipe = req.body;
 		recipeRepository
 			.saveRecipe(recipe)
 			.then(function (recipe) {

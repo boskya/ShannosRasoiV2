@@ -10,14 +10,22 @@ if ('development' == app.get('env')) {
 }
 
 if ('production' == app.get('env')) {
-  console.log('in prod environemnt');
-  app.set('db_url','http://shannos-rasoi.iriscouch.com');
+  var uriUtil = require('mongodb-uri');
+  var mongodbUri = "mongodb://admin:ShannosRasoi01@ds041238.mongolab.com:41238/heroku_app36280338";
+  var mongooseUri = uriUtil.formatMongoose(mongodbUri);
+  app.set('db_url',mongooseUri);
   app.set('db_name','shannos-rasoi');
 }
 
 var mongoose = require('mongoose');
 
 mongoose.connect(app.get('db_url'));
+
+var bodyParser = require('body-parser');
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+}));
 
 var apiRouter = express.Router();
 require('./service/routes.js')(apiRouter);

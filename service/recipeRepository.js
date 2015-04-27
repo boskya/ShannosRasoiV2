@@ -26,11 +26,12 @@ module.exports = function () {
 			ingredients: recipe.ingredients
 		});
 
-		newRecipe.save(function(err){
+		newRecipe.save(function(err, someRecipe){
 			if (err) {
 				deferred.reject();
 			}
 			else {
+				console.log(someRecipe);
 				recipe.id = newRecipe.id;
 				deferred.resolve(recipe);
 			}
