@@ -1,10 +1,7 @@
 var express = require('express');
 var app = express();
 
-var restify = require('restify');
-var restifyServer = restify.createServer();
-
-app.set('port', process.env.PORT || 3001);
+var port = process.env.PORT || 3000;
 
 if ('development' == app.get('env')) {
   console.log('in dev environemnt');
@@ -22,18 +19,12 @@ var mongoose = require('mongoose');
 
 mongoose.connect(app.get('db_url'));
 
-
-restifyServer
-  .use(restify.fullResponse())
-  .use(restify.bodyParser());
-require('./service/routes.js')(restifyServer);
-
-restifyServer.listen(app.get('port'), function () {
-    console.log('%s running on %s', restifyServer.name, restifyServer.url);
-});
+var apiRouter = express.Router();
+require('./service/routes.js')(apiRouter);
 
 app.use(express.static(__dirname+'/client/app'));
+app.use('/recipe-api', apiRouter);
 
-app.listen(3000, function () {
+app.listen(port, function () {
     console.log('%s running on %s', app.name, app.url);
 });

@@ -2,7 +2,7 @@ angular.module('ShannosRasoi').service('recipesService', ['$http', function($htt
 	'use strict';
 
 	//TODO: Configure api route.
-	var url = 'http://localhost:3001/recipe-api/';
+	var url = '/recipe-api/';
 
 	var getRecipes = function() {
 		var request = $http({
@@ -17,16 +17,16 @@ angular.module('ShannosRasoi').service('recipesService', ['$http', function($htt
 
 	var addRecipe = function(recipe) {
 		return $http
-			.post(url + "recipes", recipe)
+			.post(url + 'recipes', recipe)
 			.then(handleSuccess, handleError);
 	};
 
 	var getRecipe = function(id) {
 		var request = $http({
-				method: "get",
-				url: url + "recipes/" + id,
+				method: 'get',
+				url: url + 'recipes/' + id,
 				params: {
-					action: "get"
+					action: 'get'
 				}
 		});
 		return request.then(handleSuccess, handleError);

@@ -14,7 +14,7 @@ module.exports = function () {
 
 	function mapRecipes(rawRecipes) {
 		return rawRecipes.map(function (rawRecipe) {
-			return mapRecipe(rawRecipe.doc);
+			return mapRecipe(rawRecipe);
 		});
 	}
 
@@ -45,7 +45,7 @@ module.exports = function () {
 				deferred.reject(err);
 			}
 			else {
-				deferred.resolve(recipe);
+				deferred.resolve(mapRecipe(recipe));
 			}
 		});
 		return deferred.promise;
@@ -59,7 +59,7 @@ module.exports = function () {
 				deferred.reject(err);
 			}
 			else {
-				deferred.resolve(recipes);
+				deferred.resolve(mapRecipes(recipes));
 			}
 		});
 		return deferred.promise;

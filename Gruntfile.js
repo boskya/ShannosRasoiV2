@@ -101,11 +101,11 @@ module.exports = function (grunt) {
   grunt.registerTask('default', [
     'clean:js',
     'jshint:all',
-    'servertest',
+//    'servertest',
     'concat:js',
     'copy:angular',
     'compass',
-    'karma:unit'
+//    'karma:unit'
   ]);
 
   grunt.registerTask('ci', [

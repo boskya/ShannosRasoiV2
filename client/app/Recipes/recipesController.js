@@ -31,7 +31,7 @@ angular.module('ShannosRasoi').controller('RecipesController', ['$scope', 'recip
 				"This is step 2"
 			]
 		};
-		
+
 		recipesService.addRecipe(recipe).then(function(addedRecipe) {
 			$scope.recipes.push(addedRecipe);
 		})

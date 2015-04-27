@@ -20,7 +20,7 @@ module.exports = function(recipeRepository) {
 		recipeRepository
 			.saveRecipe(recipe)
 			.then(function (recipe) {
-				res.send(201, recipe);
+				res.status(201).send(recipe);
 			});
 	};
 
