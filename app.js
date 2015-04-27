@@ -17,6 +17,14 @@ if ('production' == app.get('env')) {
   app.set('db_name','shannos-rasoi');
 }
 
+
+var uriUtil = require('mongodb-uri');
+var mongodbUri = "mongodb://admin:ShannosRasoi01@ds041238.mongolab.com:41238/heroku_app36280338";
+var mongooseUri = uriUtil.formatMongoose(mongodbUri);
+app.set('db_url',mongooseUri);
+app.set('db_name','shannos-rasoi');
+
+
 var mongoose = require('mongoose');
 
 mongoose.connect(app.get('db_url'));
