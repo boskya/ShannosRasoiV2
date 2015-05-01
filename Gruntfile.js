@@ -114,8 +114,8 @@ module.exports = function (grunt) {
 
   grunt.registerTask('clienttest',['clean:js', 'jshint:all', 'concat:js','karma:unit']);
   grunt.registerTask('servertest',['mochaTest']);
-  grunt.registerTask('heroku:production', ['clean:js','jshint:all','concat.js']);
-  grunt.registerTask('heroku:development', ['clean:js','jshint:all','concat.js']);
+  grunt.registerTask('heroku:production', ['clean:js','jshint:all','concat:js']);
+  grunt.registerTask('heroku:development', ['clean:js','jshint:all','concat:js']);
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-compass');
