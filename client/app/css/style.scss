@@ -28,9 +28,7 @@ body {
 
 
 nav {
-	width:100vh;
-	height:100vh;
-	transform: translateX(-50%);
+	display: flex;
 
 	.menu-item {
 		fill: orange;

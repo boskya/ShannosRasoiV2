@@ -5,84 +5,47 @@
 <link rel="stylesheet" href="css/style.css" type="text/css"></link>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
 <script src="js/angular-ui-router.min.js"></script>
-<script>
-function drawArcs(startAngle, angle, startingPoint, length){
-        var endAngle = startAngle + angle;
+<script type="text/javascript" charset="utf-8">
+           function drawBowl(r, t, c) {
+             r.circle(115, 150, 15).attr({stroke: '#fff', fill: c, transform: t, "fill-opacity": .4}).click(function () {
+                 s.animate({transform: t, stroke: c}, 2000, "bounce");
+             }).mouseover(function () {
+                 this.animate({"fill-opacity": .75}, 500);
+             }).mouseout(function () {
+                 this.animate({"fill-opacity": .4}, 500);
+             });
+           }
+           window.onload = function () {
+               var r = Raphael("menu", 250, 200),
+                   angle = 0;
+               r.setViewBox(0, 0, 250, 200);
+               r.circle(120, 100, 100).attr({stroke: '#fff', fill: '#A9A151'})
+               r.circle(120, 100, 75).attr({stroke: '#fff', fill: '#8c8482'});
+               r.text(125, 100, "Shanno's Kitchen").attr({stroke: '#fff', fill: '#C8522F', font: "26px Arial Black", opacity: 0.5});
+               drawBowl(r, "r" + 120 + " 125 100", '#E29F36');
+               drawBowl(r, "r" + 165 + " 125 100", '#9B6840');
+               drawBowl(r, "r" + 210 + " 125 100", '#A9A151');
+               drawBowl(r, "r" + 305 + " 125 100", '#E29F36');
+               drawBowl(r, "r" + 350 + " 125 100", '#A9A151');
+               drawBowl(r, "r" + 35 + " 125 100", '#9B6840');
 
-        var x1 = startingPoint + length*Math.cos(Math.PI*startAngle/180);
-        var y1 = startingPoint + length*Math.sin(Math.PI*startAngle/180);
-
-        var x2 = startingPoint + length*Math.cos(Math.PI*endAngle/180);
-        var y2 = startingPoint + length*Math.sin(Math.PI*endAngle/180);
-
-        return {
-          x1: x1,
-          x2: x2,
-          y1: y1,
-          y2: y2
-        };
-
-    }
-    function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
-      var angleInRadians = angleInDegrees * Math.PI / 180.0;
-      var x = centerX + radius * Math.cos(angleInRadians);
-      var y = centerY + radius * Math.sin(angleInRadians);
-      return [x,y];
-    }
-  </script>
+               Raphael.getColor.reset();
+               //var s = r.set();
+               // s.push(r.path("M320,240c-50,100,50,110,0,190").attr({fill: "none", "stroke-width": 2}));
+               //s.push(r.circle(320, 450, 20).attr({fill: "none", "stroke-width": 2}));
+               //s.push(r.circle(320, 240, 5).attr({fill: "none", "stroke-width": 10}));
+               //s.attr({stroke: Raphael.getColor()});
+           };
+       </script>
 </head>
 <body>
    <div id="container">
    		<header>
-         <nav>
-           <svg width="100%" height="100%" viewBox="0 0 500 500">
-             <defs id="mdef">
-               <pattern id="logo" x="0" y="0" height="1" width="1">
-                 <image xlink:href="css/img/logo.png" width="200px" height="200px" x="0" y="0"/>
-               </pattern>
-            </defs>
-            <defs>
-              <clipPath id="cut-off-bottom">
-                <rect x="250" y="0" width="250" height="500" />
-              </clipPath>
-            </defs>
-                <circle cx="250" cy="250" r="250" style="stroke:#515151; fill:#515151" clip-path="url(#cut-off-bottom)" cal/>
-                <!--
-               <path fill="red" stroke="#111" stroke-width="2" d="M250,250 L375,33 A250,250 0 0,0 250,0 z" />
-               <path fill="transparent" stroke="#111" stroke-width="2" d="M250,250 L466,125 A250,250 0 0,0 375,33 z" />
-               <path fill="yellow" stroke="#111" stroke-width="2" d="M250,250 L500,250 A250,250 0 0,0 466,125 z" />
-               <path fill="red" stroke="#111" stroke-width="2" d="M250,250 L500,250 A250,250 0 0,1 466,375 z" />
-               <path fill="transparent" stroke="#111" stroke-width="2" d="M250,250 L466,375 A250,250 0 0,1 375,466 z" />
-               <path fill="yellow" stroke="#111" stroke-width="2" d="M250,250 L375,466 A250,250 0 0,1 250,500 z" />
-               <path fill="blue" stroke-width="2" d="M250,250 L250,400 A150,150 0 0,0 250,100 z" />
-             -->
-             <g>
-               <circle class="menu-item" cy="58" cx="300" r="45" />
-               <text  class="menu-item-text" x="300" y="58" text-anchor="middle" stroke-width="2px" dy=".3em">Appetizers</text>
-             </g>
-             <g>
-               <circle class="menu-item" cy="108" cx="390" r="45" />
-               <text class="menu-item-text" x="390" y="108" text-anchor="middle" stroke-width="2px" dy=".3em">Soups</text>
-             </g>
-             <g class="menu-item-group">
-               <circle class="menu-item" stroke-width="1" cy="195" cx="442" r="45" />
-               <text class="menu-item-text" x="442" y="195" text-anchor="middle" stroke-width="2px" dy=".3em">Curries</text>
-             </g>
-             <g>
-               <circle class="menu-item" stroke-width="1" cy="300" cx="442" r="45" />
-               <text class="menu-item-text" x="442" y="300" text-anchor="middle" stroke-width="2px" dy=".3em">Breads</text>
-             </g>
-             <g>
-               <circle class="menu-item" stroke-width="1" cy="392" cx="390" r="45" />
-               <text class="menu-item-text" x="390" y="392" text-anchor="middle" stroke-width="2px" dy=".3em">Desserts</text>
-             </g>
-             <g>
-               <circle class="menu-item" stroke-width="1" cy="443" cx="300" r="45" />
-               <text class="menu-item-text" x="300" y="443" text-anchor="middle" stroke-width="2px" dy=".3em">Drinks</text>
-             </g>
-           </svg>
+         <nav id="menu">
+           <div>
+             <input type="text" placeholder="Search" />
+           </div>
          </nav>
-         <div class="logo"></div>
    		</header>
 <!--   		<div ui-view></div> -->
    </div>
