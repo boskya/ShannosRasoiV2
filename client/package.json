@@ -23,7 +23,11 @@
     "gulp": "^3.9.1",
     "gulp-watch": "^4.3.5",
     "gulp-webpack": "^1.5.0",
+    "less": "^2.6.0",
+    "less-plugin-autoprefix": "^1.5.1",
+    "less-plugin-clean-css": "^1.5.1",
     "run-sequence": "^1.1.5",
+    "semantic-ui-less": "^2.1.8",
     "webpack": "^1.12.13",
     "webpack-dev-server": "^1.14.1"
   }
