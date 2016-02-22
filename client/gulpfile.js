@@ -9,6 +9,9 @@ gulp.task('copyhtml', function() {
 });
 
 gulp.task('watch', function() {
+  gulp.watch('src/**/*.js', function() {
+    runseq('webpack');
+  });
   gulp.watch('src/**/*.html',  function() {
        runseq('copyhtml');
   });

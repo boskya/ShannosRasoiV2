@@ -1,5 +1,10 @@
-'use strict';
-var component = require('./component.js');
+import React from 'react';
+import ReactDOM from 'react-dom';
 
+class Hello extends React.Component {
+  render() {
+    return <h1>Hello</h1>
+  }
+}
 
-document.body.appendChild(component());
+ReactDOM.render(<Hello/>, document.getElementById('app'));
