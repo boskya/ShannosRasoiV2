@@ -3,16 +3,20 @@
   "version": "0.0.1-1",
   "private": true,
   "scripts": {
-    "start": "node app",
-    "test": "grunt ci"
+    "start": "node index.js",
+    "test": "mocha",
+    "postinstall": "bower install"
   },
   "dependencies": {
+    "babel-preset-react": "^6.5.0",
     "body-parser": "^1.12.3",
     "express": "^4.11.2",
     "mongodb-uri": "^0.9.7",
     "mongoose": "^4.0.1",
     "nano": "^6.0.1",
-    "q": "^1.1.2"
+    "q": "^1.1.2",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7"
   },
   "devDependencies": {
     "bower": "^1.3.12",
@@ -39,10 +43,5 @@
   "subdomain": "shannos-rasoi",
   "engines": {
     "node": "0.10.x"
-  },
-  "scripts": {
-    "start": "node index.js",
-    "test": "mocha",
-    "postinstall": "bower install"
   }
 }
