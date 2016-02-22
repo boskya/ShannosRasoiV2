@@ -39,4 +39,4 @@ node_modules
 bower_components
 
 # app specific
-client/app/js
+dist
